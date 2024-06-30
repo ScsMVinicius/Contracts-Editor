@@ -1,55 +1,82 @@
 <?php
-require 'vendor/autoload.php';
 
+ob_start();
+require 'vendor/autoload.php';
 use setasign\Fpdi\Fpdi;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nome = $_POST['nome'];
     $cpf = $_POST['cpf'];
     $rg = $_POST['rg'];
+    $endereco = $_POST['endereco'];
+    $bairro = $_POST['bairro'];
+    $cidade = $_POST['cidade'];
+    $cep = $_POST['cep'];
+    $tel_cel = $_POST['tel_cel'];
+    $tel_res = $_POST['tel_res'];
+    $tel_com = $_POST['tel_com'];
+    $email = $_POST['email'];
+    $marca_modelo = $_POST['marca_modelo'];
+    $placa = $_POST['placa'];
+    $chassi = $_POST['chassi'];
+    $renavam = $_POST['renavam'];
+    $km = $_POST['km'];
+    $ano_mod = $_POST['ano_mod'];
+    $cor = $_POST['cor'];
+    $blindagem = $_POST['blindagem'];
+    $val_anunciado = $_POST['val_anunciado'];
+    $val_cliente = $_POST['val_cliente'];
 
-    // Caminho para o arquivo PDF original - altere este caminho conforme necessário
     $filePath = 'C:\Users\JM\Desktop\pdfs\contrato.pdf';
 
     if (!file_exists($filePath)) {
         die('Arquivo PDF original não encontrado.');
     }
 
-    // Inicia o FPDI e define a unidade de medida para centímetros
     $pdf = new FPDI();
     $pdf->AddPage();
     $pdf->setSourceFile($filePath);
     $tplIdx = $pdf->importPage(1);
     $pdf->useTemplate($tplIdx, 0, 0, 210);
 
-    // Define a unidade de medida para centímetros
+
     $pdf->SetMargins(0, 0);
     $pdf->SetAutoPageBreak(false);
     $pdf->SetXY(0, 0);
-    $pdf->SetFont('Arial', '', 12);
+    $pdf->SetFont('Arial', '', 11);
 
-    // Coordenadas em centímetros
-    $x_cm_nome = 2.8; // substitua com suas coordenadas
-    $y_cm_nome = 7.3; // substitua com suas coordenadas
-    $x_cm_cpf = 3.2; // substitua com suas coordenadas
+    $x_cm_nome = 2.8; 
+    $y_cm_nome = 7.3; 
+
+    $x_cm_cpf = 3.2; 
     $y_cm_cpf = 8.0;
-    $x_cm_rg = 11.3; // substitua com suas coordenadas
+
+    $x_cm_rg = 11.3; 
     $y_cm_rg = 8.0;
 
+    $x_cm_endereco = 3.1; 
+    $y_cm_endereco = 8.7;
 
-    ; // substitua com suas coordenadas
+    $x_cm_bairro = 2.6; 
+    $y_cm_bairro = 9.4; 
 
-    // Utilizando as coordenadas diretamente em centímetros
-    $pdf->SetXY($x_cm_nome * 10, $y_cm_nome * 10); // Coordenadas para o campo Nome
+    $pdf->SetXY($x_cm_nome * 10, $y_cm_nome * 10); 
     $pdf->Write(0, $nome);
 
-    $pdf->SetXY($x_cm_cpf * 10, $y_cm_cpf * 10); // Coordenadas para o campo Valor
+    $pdf->SetXY($x_cm_cpf * 10, $y_cm_cpf * 10); 
     $pdf->Write(0, $cpf);
 
-    $pdf->SetXY($x_cm_rg * 10, $y_cm_rg * 10); // Coordenadas para o campo Nome
+    $pdf->SetXY($x_cm_rg * 10, $y_cm_rg * 10);
     $pdf->Write(0, $rg);
 
-    // Saída do arquivo PDF modificado
+    $pdf->SetXY($x_cm_endereco * 10, $y_cm_endereco * 10);
+    $pdf->Write(0, $endereco);
+
+    $pdf->SetXY($x_cm_bairro * 10, $y_cm_bairro * 10);
+    $pdf->Write(0, $bairro);
+    ob_end_flush();
+    
     $pdf->Output('I', 'contrato_modificado.pdf');
 }
+
 ?>
