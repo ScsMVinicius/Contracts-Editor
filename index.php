@@ -29,9 +29,6 @@
         <label for="tel_cel">TEL.Celular:</label>
         <input type="text" id="tel_cel" name="tel_cel"><br><br>
 
-        <label for="tel_res">TEL.Residencial:</label>
-        <input type="text" id="tel_res" name="tel_res"><br><br>
-
         <label for="tel_com">TEL.Comercial:</label>
         <input type="text" id="tel_com" name="tel_com"><br><br>
 
